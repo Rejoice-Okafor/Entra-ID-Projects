@@ -1,33 +1,31 @@
-# User Provisioning Automation
+# FIDO2 Passkeys – Passwordless Authentication
 
 ## Overview
-Developed PowerShell scripts using Microsoft Graph API to automate user creation, license assignment, and group management. Reduced onboarding time and ensured consistent compliance.
+Implemented passwordless authentication using FIDO2 security keys and biometric passkeys in Entra ID. Eliminated password-based logins, reducing phishing risks and improving user experience.
 
 ## Problem
-Manual user provisioning was time-consuming, error-prone, and led to inconsistent license assignments and orphaned accounts.
+Users relied on passwords, which were vulnerable to phishing and brute-force attacks. Helpdesk calls for password resets were frequent.
 
 ## Solution
-- Automated user creation from HR input data.  
-- Assigned Microsoft 365 licenses based on role.  
-- Added users to security groups for role-based access.  
-- Automated deprovisioning for departing employees.
+- Registered FIDO2 security keys and passkeys (Windows Hello, biometrics) in Entra ID.  
+- Configured authentication methods policy to enable passwordless sign-ins.  
+- Tested sign-in with Microsoft 365 and other Entra-integrated apps using face recognition/biometric authentication.
 
 ## Results
-- Onboarding time reduced from hours to minutes.  
-- Zero missed license assignments or group memberships.  
-- Improved compliance by automatically removing orphaned accounts.
+- Password-based logins eliminated for targeted user groups.  
+- Phishing and credential theft risks reduced near-zero.  
+- Improved user experience with faster, secure login flows.
 
 ## Highlights / Skills Used
 - Microsoft Entra ID  
-- PowerShell  
-- Microsoft Graph API  
-- Identity Lifecycle Management  
-- Automation  
-
-## Scripts
-All automation scripts can be found in the `/scripts` folder.
+- FIDO2 Security Keys  
+- Passkeys  
+- Passwordless Authentication  
+- Identity Protection  
 
 ## Screenshots
-![User Provisioning Output](screenshots/provisioning-output.png)
+![FIDO2 Registration](screenshots/fido2-registration.png)  
+![Passwordless Login](screenshots/passwordless-login.png)
 
-
+## Diagrams
+*(Optional: Add passwordless authentication flow diagram here)*
