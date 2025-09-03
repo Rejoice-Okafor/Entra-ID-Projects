@@ -1,13 +1,35 @@
-# 03-add-to-groups.ps1
+# 02-add-to-groups.ps1
 # Add user to security groups based on role
+# Connect to Microsoft Graph
+Connect-MgGraph -Scopes 'Group.ReadWrite.All'
 
-Connect-MgGraph -Scopes "Group.ReadWrite.All"
+# Group to add users to (replace with your group ID or display name)
+$GroupId = "YOUR-GROUP-ID-HERE"  # You can get this from Azure portal or via Get-MgGroup
 
-$UserId = "jdoe@yourtenant.onmicrosoft.com"
-$GroupIds = @("group-id-1", "group-id-2") # Replace with actual group IDs
+# Array of users to add
+$Users = @(
+    "jdoe@yourtenant.onmicrosoft.com",
+    "asmith@yourtenant.onmicrosoft.com",
+    "bnguyen@yourtenant.onmicrosoft.com"
+)
 
-foreach ($GroupId in $GroupIds) {
-    Add-MgGroupMember -GroupId $GroupId -DirectoryObjectId $UserId
-    Write-Host "Added $UserId to group $GroupId"
+# Array to store output for display
+$Output = @()
+
+foreach ($UPN in $Users) {
+    # Get the user object by UPN
+    $User = Get-MgUser -UserId $UPN
+
+    # Add the user to the group
+    Add-MgGroupMember -GroupId $GroupId -DirectoryObjectId $User.Id
+
+    # Store output
+    $Output += [PSCustomObject]@{
+        UserPrincipalName = $UPN
+        GroupAddedTo     = $GroupId
+        Status           = "Added Successfully"
+    }
 }
 
+# Display results in a table
+$Output | Format-Table -AutoSize
