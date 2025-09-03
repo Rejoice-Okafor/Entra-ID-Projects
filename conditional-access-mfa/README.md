@@ -16,6 +16,7 @@ Employees were signing in from unmanaged devices, unknown and unsecured networks
 - Account takeover risk reduced significantly.  
 - Legacy authentication–based attacks were blocked.  
 - Security strengthened without disrupting end-user workflow.
+- Only managed and compliant devices can access company's resources
 
 ## Highlights / Skills Used
 - Microsoft Entra ID  
