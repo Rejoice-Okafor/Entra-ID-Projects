@@ -1,16 +1,17 @@
 # Conditional Access & MFA
 
 ## Overview
-Implemented Microsoft Entra Conditional Access policies to enforce Multi-Factor Authentication (MFA) and block legacy authentication. This reduced account takeover risks while maintaining seamless access for compliant users and trusted devices.
+Implemented Microsoft Entra Conditional Access policies to enforce Multi-Factor Authentication (MFA), restrict users from logging in from unknown locations and block legacy authentication. This reduced account takeover risks while maintaining seamless access for compliant users and trusted devices.
 
 ## Problem
-Employees were signing in from unmanaged devices and unsecured networks, exposing accounts to phishing and brute-force attacks. Legacy authentication protocols bypassed MFA entirely, creating additional security risks.
+Employees were signing in from unmanaged devices, unknown and unsecured networks, exposing accounts to phishing and brute-force attacks. Legacy authentication protocols bypassed MFA entirely, creating additional security risks.
 
 ## Solution
 - Designed and implemented Conditional Access policies requiring MFA for high-risk logins.  
-- Blocked legacy authentication protocols (POP/IMAP/SMTP).  
+- Blocked legacy authentication protocols (POP/IMAP/SMTP).
+- Blocked users from signing in from locations outside the UK.
 - Allowed seamless sign-in for compliant devices and trusted locations.  
-- Documented user experiences to ensure productivity was not impacted.
+- Require devices to be marked as compliant.
 
 ## Results
 - Account takeover risk reduced significantly.  
