@@ -1,21 +1,32 @@
-# 04-deprovision-user.ps1
-# Disable user account and remove from groups
+# Connect to Microsoft Graph
+Connect-MgGraph -Scopes 'User.ReadWrite.All','Directory.ReadWrite.All'
 
-Connect-MgGraph -Scopes "User.ReadWrite.All","Group.ReadWrite.All"
+# Array of users to deprovision
+$Users = @(
+    "jdoe@yourtenant.onmicrosoft.com",
+    "asmith@yourtenant.onmicrosoft.com",
+    "bnguyen@yourtenant.onmicrosoft.com"
+)
 
-$UserId = "jdoe@yourtenant.onmicrosoft.com"
+# Array to store output
+$Output = @()
 
-# Disable user account
-Update-MgUser -UserId $UserId -AccountEnabled:$false
-Write-Host "$UserId account disabled."
+foreach ($UPN in $Users) {
+    # Get the user object
+    $User = Get-MgUser -UserId $UPN
 
-# Optionally remove licenses
-# Set-MgUserLicense -UserId $UserId -RemoveLicenses @("ENTERPRISEPACK")
+    # Disable the account
+    Set-MgUser -UserId $User.Id -AccountEnabled $false
 
-# Optionally remove from groups
-#$GroupIds = @("group-id-1","group-id-2")
-#foreach ($GroupId in $GroupIds) {
-#    Remove-MgGroupMember -GroupId $GroupId -DirectoryObjectId $UserId
-#    Write-Host "Removed $UserId from group $GroupId"
-#}
+    # Optional: Remove the user completely
+    # Remove-MgUser -UserId $User.Id
 
+    # Store output
+    $Output += [PSCustomObject]@{
+        UserPrincipalName = $UPN
+        Status            = "Disabled Successfully"
+    }
+}
+
+# Display results in a table
+$Output | Format-Table -AutoSize
